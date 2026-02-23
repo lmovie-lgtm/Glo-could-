@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Login - Global Pilgrim Bank</title>
+    <link rel="stylesheet" href="../css/style.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+
+<div class="login-box">
+    <div class="bank-header">
+        <h2>👤 Customer Login</h2>
+        <p style="color: #94a3b8; margin-bottom: 20px;">Global Pilgrim Bank - Online Banking</p>
+    </div>
+
+    <div class="login-form">
+        <label>Account Number</label>
+        <input type="text" id="accountNumber" placeholder="Enter your account number">
+        
+        <label>Serial Number</label>
+        <input type="text" id="serialNumber" placeholder="Enter your serial number">
+        
+        <label>Login PIN</label>
+        <input type="password" id="loginPin" placeholder="Enter your 4-digit PIN" maxlength="4">
+        
+        <button onclick="customerLogin()">Login to Dashboard</button>
+    </div>
+
+    <div id="error" class="error"></div>
+
+    <div class="sync-section" style="margin-top: 30px; padding: 20px; background: rgba(34, 197, 94, 0.1); border-radius: 10px; border: 1px solid #22c55e;">
+        <h3 style="color: #22c55e; margin-bottom: 15px;">🔄 Daily Sync Bonus</h3>
+        <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 15px;">
+            Click the sync button once daily to receive a $5 bonus credited to your account.
+        </p>
+        <button onclick="dailySync()" id="syncButton" style="width: auto; padding: 10px 30px;">Sync Now</button>
+        <p id="syncStatus" style="margin-top: 10px; color: #94a3b8; font-size: 0.85rem;"></p>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <a href="../index.html" style="color: #22c55e; text-decoration: none;">← Back to Home</a>
+    </div>
+</div>
+
+<script src="../js/app.js"></script>
+<script>
+function customerLogin() {
+    const account = document.getElementById('accountNumber').value.trim();
+    const serial = document.getElementById('serialNumber').value.trim();
+    const pin = document.getElementById('loginPin').value.trim();
+    
+    const errorDiv = document.getElementById('error');
+    
+    if (!account || !serial || !pin) {
+        errorDiv.innerText = 'Please fill in all fields';
+        return;
+    }
+    
+    const customers = JSON.parse(localStorage.getItem('customers')) || [];
+    const customer = customers.find(c => 
+        c.account === account && 
+        c.serial === serial &&
+        c.loginPin === pin
+    );
+    
+    if (customer) {
+        if (customer.status !== 'active') {
+            errorDiv.innerText = 'Your account is ' + customer.status + '. Please contact support.';
+            return;
+        }
+        
+        // Set current customer session
+        localStorage.setItem('currentCustomer', JSON.stringify(customer));
+        localStorage.setItem('customerLoginTime', new Date().toISOString());
+        
+        showToast('Welcome back, ' + customer.name + '!', 'success');
+        
+        setTimeout(() => {
+            window.location.href = 'customer-dashboard.html';
+        }, 1000);
+    } else {
+        errorDiv.innerText = '❌ Invalid account number, serial number, or PIN';
+        
+        setTimeout(() => {
+            errorDiv.innerText = '';
+        }, 5000);
+    }
+}
+
+function dailySync() {
+    const lastSync = localStorage.getItem('customerLastSync');
+    const today = new Date().toDateString();
+    
+    if (lastSync === today) {
+        document.getElementById('syncStatus').textContent = '✅ Already synced today. Come back tomorrow!';
+        document.getElementById('syncStatus').style.color = '#22c55e';
+        return;
+    }
+    
+    // Check if user is logged in
+    const currentCustomer = JSON.parse(localStorage.getItem('currentCustomer'));
+    if (!currentCustomer) {
+        alert('Please login first to sync your account');
+        return;
+    }
+    
+    // Add $5 bonus
+    const customers = JSON.parse(localStorage.getItem('customers')) || [];
+    const customerIndex = customers.findIndex(c => c.account === currentCustomer.account);
+    
+    if (customerIndex !== -1) {
+        customers[customerIndex].balanceUSD += 5;
+        
+        // Add ledger entry
+        customers[customerIndex].ledger.push({
+            date: new Date().toISOString(),
+            type: 'credit',
+            amount: 5,
+            currency: 'USD',
+            description: 'Daily sync bonus'
+        });
+        
+        localStorage.setItem('customers', JSON.stringify(customers));
+        localStorage.setItem('customerLastSync', today);
+        localStorage.setItem('currentCustomer', JSON.stringify(customers[customerIndex]));
+        
+        document.getElementById('syncStatus').textContent = '✅ Synced successfully! $5 credited to your account.';
+        document.getElementById('syncStatus').style.color = '#22c55e';
+        
+        showToast('$5 sync bonus credited to your account!', 'success');
+    }
+}
+</script>
+
+</body>
+</html>

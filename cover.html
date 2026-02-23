@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forex Trading - Global Pilgrim Bank</title>
+    <link rel="stylesheet" href="../css/style.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+
+<div class="cover">
+    <div class="forex-header">
+        <h1>📊 FOREX TRADING PLATFORM</h1>
+        <h2>Global Pilgrim Bank - MetaTrader Integration</h2>
+        <p style="color: #94a3b8; margin: 10px 0;">Owner: Olawale Abdul-Ganiyu Adeshina (Adegan95)</p>
+        <p style="color: #94a3b8;">Server: Single Personal Network (6G-001) | 5G-001 | 4G-001 | 3G-001 | 2G-001</p>
+    </div>
+
+    <div class="account-info" style="background: rgba(30, 41, 59, 0.8); padding: 30px; border-radius: 15px; margin: 30px auto; max-width: 900px; border: 2px solid #8b5cf6;">
+        <h3 style="color: #22c55e; margin-bottom: 20px; text-align: center;">🏦 Trading Account</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+            <div>
+                <p style="color: #94a3b8;">Account Number</p>
+                <p style="font-size: 1.3rem; color: #8b5cf6; font-weight: 600;">0001234567</p>
+            </div>
+            <div>
+                <p style="color: #94a3b8;">Server</p>
+                <p style="font-size: 1.3rem; color: #8b5cf6; font-weight: 600;">6G-001</p>
+            </div>
+            <div>
+                <p style="color: #94a3b8;">CSCS Account</p>
+                <p style="font-size: 1.3rem; color: #8b5cf6; font-weight: 600;">CSCS12345</p>
+            </div>
+            <div>
+                <p style="color: #94a3b8;">BVN</p>
+                <p style="font-size: 1.3rem; color: #8b5cf6; font-weight: 600;">22203477535</p>
+            </div>
+        </div>
+        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #334155;">
+            <p style="color: #94a3b8;">Registered Email</p>
+            <p style="font-size: 1.1rem; color: #22c55e;">adegan95@gmail.com | olawalzte@gmail.com</p>
+        </div>
+    </div>
+
+    <div class="balance-display" style="background: rgba(30, 41, 59, 0.8); padding: 30px; border-radius: 15px; margin: 30px auto; max-width: 900px;">
+        <h3 style="color: #22c55e; margin-bottom: 20px; text-align: center;">💰 Account Balance</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+            <div style="padding: 20px; background: rgba(139, 92, 246, 0.1); border-radius: 10px; text-align: center;">
+                <p style="color: #94a3b8; font-size: 0.9rem;">Main Balance</p>
+                <p id="mainBalance" style="font-size: 2rem; color: #8b5cf6; margin: 10px 0;">$0.00</p>
+            </div>
+            <div style="padding: 20px; background: rgba(34, 197, 94, 0.1); border-radius: 10px; text-align: center;">
+                <p style="color: #94a3b8; font-size: 0.9rem;">Profit Balance</p>
+                <p id="profitBalance" style="font-size: 2rem; color: #22c55e; margin: 10px 0;">$0.00</p>
+            </div>
+            <div style="padding: 20px; background: rgba(245, 158, 11, 0.1); border-radius: 10px; text-align: center;">
+                <p style="color: #94a3b8; font-size: 0.9rem;">Open Trades</p>
+                <p id="openTrades" style="font-size: 2rem; color: #f59e0b; margin: 10px 0;">0</p>
+            </div>
+            <div style="padding: 20px; background: rgba(14, 165, 233, 0.1); border-radius: 10px; text-align: center;">
+                <p style="color: #94a3b8; font-size: 0.9rem;">Total Profit</p>
+                <p id="totalProfit" style="font-size: 2rem; color: #0ea5e9; margin: 10px 0;">$0.00</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="trading-controls" style="background: rgba(30, 41, 59, 0.8); padding: 30px; border-radius: 15px; margin: 30px auto; max-width: 900px;">
+        <h3 style="color: #22c55e; margin-bottom: 20px;">🤖 Robot Trading Controls</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+            <button onclick="startAutoTrading()" style="padding: 15px; font-size: 1.1rem;">▶️ Start Auto Trading</button>
+            <button onclick="stopAutoTrading()" style="padding: 15px; font-size: 1.1rem; background: linear-gradient(135deg, #ef4444, #dc2626);">⏹️ Stop Auto Trading</button>
+            <button onclick="manualTrade()" style="padding: 15px; font-size: 1.1rem; background: linear-gradient(135deg, #f59e0b, #d97706);">📈 Manual Trade</button>
+            <button onclick="transferToBank()" style="padding: 15px; font-size: 1.1rem; background: linear-gradient(135deg, #0ea5e9, #0284c7);">🏦 Transfer to Bank</button>
+        </div>
+    </div>
+
+    <div class="trading-pairs" style="background: rgba(30, 41, 59, 0.8); padding: 30px; border-radius: 15px; margin: 30px auto; max-width: 900px;">
+        <h3 style="color: #22c55e; margin-bottom: 20px;">💱 Trading Pairs</h3>
+        
+        <div style="margin-bottom: 30px;">
+            <h4 style="color: #8b5cf6; margin-bottom: 15px;">🌍 Forex Pairs</h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px;">
+                <div class="pair-card" style="padding: 15px; background: rgba(139, 92, 246, 0.1); border-radius: 8px; cursor: pointer;" onclick="selectPair('GBP/USD')">
+                    <p style="color: #8b5cf6; font-weight: 600;">GBP/USD</p>
+                    <p style="color: #94a3b8; font-size: 0.8rem;">UK/US</p>
+                </div>
+                <div class="pair-card" style="padding: 15px; background: rgba(139, 92, 246, 0.1); border-radius: 8px; cursor: pointer;" onclick="selectPair('EUR/USD')">
+                    <p style="color: #8b5cf6; font-weight: 600;">EUR/USD</p>
+                    <p style="color: #94a3b8; font-size: 0.8rem;">EU/US</p>
+                </div>
+                <div class="pair-card" style="padding: 15px; background: rgba(139, 92, 246, 0.1); border-radius: 8px; cursor: pointer;" onclick="selectPair('USD/JPY')">
+                    <p style="color: #8b5cf6; font-weight: 600;">USD/JPY</p>
+                    <p style="color: #94a3b8; font-size: 0.8rem;">US/Japan</p>
+                </div>
+                <div class="pair-card" style="padding: 15px; background: rgba(139, 92, 246, 0.1); border-radius: 8px; cursor: pointer;" onclick="selectPair('USD/CHF')">
+                    <p style="color: #8b5cf6; font-weight: 600;">USD/CHF</p>
+                    <p style="color: #94a3b8; font-size: 0.8rem;">US/Swiss</p>
+                </div>
+                <div class="pair-card" style="padding: 15px; background: rgba(139, 92, 246, 0.1); border-radius: 8px; cursor: pointer;" onclick="selectPair('AUD/USD')">
+                    <p style="color: #8b5cf6; font-weight: 600;">AUD/USD</p>
+                    <p style="color: #94a3b8; font-size: 0.8rem;">Australia/US</p>
+                </div>
+                <div class="pair-card" style="padding: 15px; background: rgba(139, 92, 246, 0.1); border-radius: 8px; cursor: pointer;" onclick="selectPair('USD/CAD')">
+                    <p style="color: #8b5cf6; font-weight: 600;">USD/CAD</p>
+                    <p style="color: #94a3b8; font-size: 0.8rem;">US/Canada</p>
+                </div>
+                <div class="pair-card" style="padding: 15px; background: rgba(139, 92, 246, 0.1); border-radius: 8px; cursor: pointer;" onclick="selectPair('USD/NGN')">
+                    <p style="color: #8b5cf6; font-weight: 600;">USD/NGN</p>
+                    <p style="color: #94a3b8; font-size: 0.8rem;">US/Nigeria</p>
+                </div>
+                <div class="pair-card" style="padding: 15px; background: rgba(139, 92, 246, 0.1); border-radius: 8px; cursor: pointer;" onclick="selectPair('NZD/USD')">
+                    <p style="color: #8b5cf6; font-weight: 600;">NZD/USD</p>
+                    <p style="color: #94a3b8; font-size: 0.8rem;">NZ/US</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 30px;">
+            <h4 style="color: #f59e0b; margin-bottom: 15px;">₿ Crypto Pairs</h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px;">
+                <div class="pair-card" style="padding: 15px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; cursor: pointer;" onclick="selectPair('BTC/ETH')">
+                    <p style="color: #f59e0b; font-weight: 600;">BTC/ETH</p>
+                    <p style="color: #94a3b8; font-size: 0.8rem;">Bitcoin/Ethereum</p>
+                </div>
+                <div class="pair-card" style="padding: 15px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; cursor: pointer;" onclick="selectPair('ETH/BNB')">
+                    <p style="color: #f59e0b; font-weight: 600;">ETH/BNB</p>
+                    <p style="color: #94a3b8; font-size: 0.8rem;">Ethereum/BNB</p>
+                </div>
+                <div class="pair-card" style="padding: 15px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; cursor: pointer;" onclick="selectPair('BTC/USDT')">
+                    <p style="color: #f59e0b; font-weight: 600;">BTC/USDT</p>
+                    <p style="color: #94a3b8; font-size: 0.8rem;">Bitcoin/Tether</p>
+                </div>
+                <div class="pair-card" style="padding: 15px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; cursor: pointer;" onclick="selectPair('ETH/USDT')">
+                    <p style="color: #f59e0b; font-weight: 600;">ETH/USDT</p>
+                    <p style="color: #94a3b8; font-size: 0.8rem;">Ethereum/Tether</p>
+                </div>
+                <div class="pair-card" style="padding: 15px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; cursor: pointer;" onclick="selectPair('SOL/USDT')">
+                    <p style="color: #f59e0b; font-weight: 600;">SOL/USDT</p>
+                    <p style="color: #94a3b8; font-size: 0.8rem;">Solana/Tether</p>
+                </div>
+                <div class="pair-card" style="padding: 15px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; cursor: pointer;" onclick="selectPair('XRP/USDT')">
+                    <p style="color: #f59e0b; font-weight: 600;">XRP/USDT</p>
+                    <p style="color: #94a3b8; font-size: 0.8rem;">Ripple/Tether</p>
+                </div>
+                <div class="pair-card" style="padding: 15px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; cursor: pointer;" onclick="selectPair('ADA/USDT')">
+                    <p style="color: #f59e0b; font-weight: 600;">ADA/USDT</p>
+                    <p style="color: #94a3b8; font-size: 0.8rem;">Cardano/Tether</p>
+                </div>
+                <div class="pair-card" style="padding: 15px; background: rgba(22, 197, 94, 0.1); border-radius: 8px; cursor: pointer; border: 2px solid #22c55e;" onclick="selectPair('PGM/USDT')">
+                    <p style="color: #22c55e; font-weight: 600;">PGM/USDT</p>
+                    <p style="color: #94a3b8; font-size: 0.8rem;">Pilgrim Coin</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="transactions-section" style="background: rgba(30, 41, 59, 0.8); padding: 30px; border-radius: 15px; margin: 30px auto; max-width: 900px;">
+        <h3 style="color: #22c55e; margin-bottom: 20px;">📊 Trading History</h3>
+        <div id="tradingHistory" style="max-height: 400px; overflow-y: auto;">
+            <p style="color: #94a3b8;">No trading history yet</p>
+        </div>
+    </div>
+
+    <div class="buttons" style="margin-top: 40px;">
+        <a href="../index.html" class="btn btn-primary">← Back to Home</a>
+        <a href="../pilgrim-coin/cover.html" class="btn btn-accent">Pilgrim Coin</a>
+    </div>
+</div>
+
+<script src="../js/forex.js"></script>
+
+</body>
+</html>

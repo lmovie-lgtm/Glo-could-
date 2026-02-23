@@ -1,0 +1,14 @@
+/workspace/admin-dashboard.html
+/workspace/admin-login.html
+/workspace/cloud/index.html
+/workspace/css/style.css
+/workspace/customer/customer-dashboard.html
+/workspace/customer/customer-login.html
+/workspace/forex/cover.html
+/workspace/index.html
+/workspace/js/app.js
+/workspace/js/cloud.js
+/workspace/js/customer.js
+/workspace/js/forex.js
+/workspace/js/pilgrim-coin.js
+/workspace/pilgrim-coin/cover.html

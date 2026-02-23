@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Global Pilgrim Bank</title>
+    <link rel="stylesheet" href="css/style.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+
+<div class="login-box">
+    <div class="bank-header">
+        <h2>🔐 Admin Secure Login</h2>
+        <p style="color: #94a3b8; margin-bottom: 20px;">Global Pilgrim Bank - Administrative Access</p>
+    </div>
+
+    <div class="login-form">
+        <label>Account Number / BVN</label>
+        <input type="text" id="account" placeholder="Enter BVN or Account Number">
+        
+        <label>Serial Number / Phone</label>
+        <input type="text" id="phone" placeholder="Phone Number or Serial">
+        
+        <label>Security PIN</label>
+        <input type="password" id="pin" placeholder="Enter 4-digit PIN" maxlength="4">
+        
+        <button onclick="adminLogin()">Login to Dashboard</button>
+    </div>
+
+    <div id="error" class="error"></div>
+    
+    <div id="network-info" class="network-status" style="margin-top: 20px; color: #94a3b8; font-size: 0.85rem;">
+        <p>🌐 Network: <span id="network-type">Detecting...</span></p>
+        <p>📍 IP Address: <span id="ip-address">Detecting...</span></p>
+        <p>🕐 Last Login: <span id="last-login">Never</span></p>
+    </div>
+
+    <div class="security-notice" style="margin-top: 20px; padding: 15px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; border: 1px solid #f59e0b;">
+        <p style="color: #f59e0b; font-size: 0.85rem;">
+            ⚠️ <strong>SECURITY NOTICE:</strong> Only Olawale Abdul-Ganiyu (Adegan95) is authorized to access this admin panel.
+            All unauthorized login attempts are logged and will trigger security alerts.
+        </p>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <a href="index.html" style="color: #22c55e; text-decoration: none;">← Back to Home</a>
+    </div>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+// Get network information
+document.addEventListener('DOMContentLoaded', function() {
+    // Simulate network detection
+    document.getElementById('network-type').textContent = 'Authorized Network';
+    document.getElementById('ip-address').textContent = localStorage.getItem('adminIP') || '192.168.1.' + Math.floor(Math.random() * 255);
+    
+    // Load last login
+    const lastLogin = localStorage.getItem('adminLastLogin');
+    if (lastLogin) {
+        document.getElementById('last-login').textContent = lastLogin;
+    }
+    
+    // Check if admin is already logged in
+    if (localStorage.getItem('admin') === 'true') {
+        window.location.href = 'admin-dashboard.html';
+    }
+});
+</script>
+
+</body>
+</html>
